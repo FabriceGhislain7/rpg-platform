@@ -62,7 +62,7 @@ rpg-platform/
 ├── requirements.txt
 │
 ├── core_app/
-│   ├── **init**.py        # Flask application factory
+│   ├── __init__.py        # Flask application factory
 │   │
 │   ├── api/               # HTTP API layer (Blueprints)
 │   │   └── ping_api.py
