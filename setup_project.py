@@ -2,32 +2,56 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
+# Cartelle del progetto
 structure = [
-    "app",
-    "app/api",
-    "app/domain",
-    "app/services",
-    "app/repositories"
+    "data",
+    "core_app",
+    "core_app/api",
+    "core_app/domain",
+    "core_app/services",
+    "core_app/repositories"
 ]
 
-for rel_path_folder in structure:
-    full_path_file = os.path.join(BASE_DIR, rel_path_folder)
-    os.makedirs(full_path_file, exist_ok=True)
-    print(f"Created path: {rel_path_folder}")
+for rel_path in structure:
+    full_path = os.path.join(BASE_DIR, rel_path)
+    os.makedirs(full_path, exist_ok=True)
+    print(f"Created directory: {rel_path}")
 
+# File base
 init_files = [
-    "app/__init__.py",
-    "app/api/__init__.py",
-    "app/domain/__init__.py",
-    "app/services/__init__.py",
-    "app/repositories/__init__.py"
+    "server.py",
+    "config.py",
+    "core_app/__init__.py",
+    "core_app/api/__init__.py",
+    "core_app/domain/__init__.py",
+    "core_app/services/__init__.py",
+    "core_app/repositories/__init__.py"
 ]
 
-for rel_path_file in init_files:
-    full_path_file = os.path.join(BASE_DIR, rel_path_file)
-    if not os.path.exists(full_path_file):
-        with open(full_path_file, "w") as f:
-            f.write("")
-        print(f"File created: {rel_path_file}")
+for rel_file in init_files:
+    full_path = os.path.join(BASE_DIR, rel_file)
+    if not os.path.exists(full_path):
+        with open(full_path, "w", encoding="utf-8"):
+            pass
+        print(f"Created file: {rel_file}")
 
-print("\nProject structure created successfully.")
+
+# requirements.txt
+requirements = [
+    "Flask==3.1.1",
+    "Flask-SQLAlchemy==3.1.1",
+    "SQLAlchemy==2.0.41",
+    "python-dotenv==1.0.1",
+    "gunicorn==22.0.0",
+    "pydantic==2.8.2"
+]
+
+req_path = os.path.join(BASE_DIR, "requirements.txt")
+
+if not os.path.exists(req_path):
+    with open(req_path, "w", encoding="utf-8") as f:
+        for pkg in requirements:
+            f.write(pkg + "\n")
+    print("Created file: requirements.txt")
+
+print("\n Project structure created successfully.")
