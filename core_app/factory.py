@@ -1,14 +1,14 @@
-# core_app/factory.py
-
 from flask import Flask
 from dotenv import load_dotenv
 from config import Config
 
+
 def create_app() -> Flask:
     """
-    Crea e configura l'app Flask.
+    Crea e configura l'applicazione Flask per l'ambiente corrente.
+    Carica eventuali variabili da file .env e registra i blueprint API.
     """
-    load_dotenv()
+    load_dotenv()  # Carica variabili d'ambiente da .env, se presente
 
     app = Flask(__name__)
     app.config.from_object(Config)
