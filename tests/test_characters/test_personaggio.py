@@ -7,3 +7,6 @@ def test_attacco_generato():
     assert isinstance(danno, int)
     assert danno >= 0
     assert danno <= pg.attacco_max + 10
+
+def test_danno_subito():
+    pg = Personaggio.
