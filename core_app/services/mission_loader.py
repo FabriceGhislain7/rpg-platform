@@ -1,18 +1,18 @@
-# core_app/services/mission_loader.py
-
-from core_app.schemas.missione_schema import MissioniSchema
+import os
+import json
 from engine_core.missions.gestore import GestoreMissioni
-import os, json
+from core_app.schemas.missione_schema import MissioniSchema
 
-def carica_missioni(directory="static/mission") -> GestoreMissioni:
+def carica_missioni(directory: str = "static/mission") -> GestoreMissioni:
     schema = MissioniSchema()
     missioni = []
-    for filename in os.listdir(directory):
-        if filename.endswith(".json"):
-            with open(os.path.join(directory, filename), "r") as file:
-                data = json.load(file)
-                missioni += schema.load(data)  # carica tutte
 
-    gm = GestoreMissioni()
-    gm.lista_missioni = missioni
-    return gm
+    for file in os.listdir(directory):
+        if file.endswith(".json"):
+            with open(os.path.join(directory, file), 'r') as f:
+                data = json.load(f)
+                missioni += schema.load(data)
+
+    gestore = GestoreMissioni()
+    gestore.lista_missioni = missioni
+    return gestore
